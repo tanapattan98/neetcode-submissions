@@ -1,0 +1,21 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if (nums.length == 0) return 0;
+        if (nums.length == 1) return 1;
+
+        Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        int longest = 0;
+
+        for(int num : nums){
+            if (!set.contains(num - 1)) {
+                int length = 0;
+                while (set.contains(num + length)) {
+                    length++;
+                }
+                longest = Math.max(longest, length);
+            }
+        }
+
+        return longest;
+    }
+}
